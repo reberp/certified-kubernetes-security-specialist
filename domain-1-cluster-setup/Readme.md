@@ -5,11 +5,11 @@ The code mentioned in this document are used in the Certified Kubernetes Securit
 
 # Video-Document Mapper
 
-| Sr No | Document Link |
-| ------ | ------ |
-| 1 | [Configuring ETCD Binaries][PlDa] |
-| 2 | [Overview of Certificate Authority][PlDb] |
-| 3 | [In-Transit Encryption with HTTPS][PlDc]
+| Sr No | Document Link | Done |
+| ------ | ------ | ------ |
+| 1 | [Configuring ETCD Binaries][PlDa] | X |
+| 2 | [Overview of Certificate Authority][PlDb] | X |
+| 3 | [In-Transit Encryption with HTTPS][PlDc] | X |
 | 4 | [Client Authentication in ETCD][PlDd] |
 | 5 | [Integrating Systemd with ETCD][PlDe] |
 | 6 | [Configuring API Server][PlDf] |
