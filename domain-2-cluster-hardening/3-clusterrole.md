@@ -22,8 +22,7 @@ rules:
   ```
 ```sh
 kubectl apply -f clusterrole.yaml
-```
-```sh
+k create ns development # for test
 kubectl get clusterrole
 ```
 

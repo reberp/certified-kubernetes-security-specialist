@@ -1,10 +1,35 @@
   #### Explore the API Groups:
 ```sh
 kubectl proxy --port 8085
+#Starting to serve on 127.0.0.1:8085
 ```
 ```sh
 curl localhost:8085
-curl localhost:8085/api/v1
+"""
+  "paths": [
+    "/.well-known/openid-configuration",
+    "/api",
+    "/api/v1",
+    "/apis",
+    "/apis/",
+    "/apis/admissionregistration.k8s.io",
+    "/apis/admissionregistration.k8s.io/v1",
+    "/apis/apiextensions.k8s.io",
+"""
+curl localhost:8085/api/v1 | grep -A10 pods #get actions for pods
+"""
+      "name": "pods",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Pod",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+"""
 ```
   #### Step 1 Create RBAC Role:
 ```sh
@@ -54,16 +79,26 @@ roleRef:
 kubectl apply -f rolebinding.yaml
 kubectl get rolebinding
 kubectl describe rolebinding read-pods
+Name:         read-pods
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  Role
+  Name:  pod-reader
+Subjects:
+  Kind  Name  Namespace
+  ----  ----  ---------
+  User  john
 ```
   #### Step 3 - Verify from user John:
 ```sh
 su - john
-kubectl get pods
+kubectl get pods #works except for -A
 kubectl run john-pod --image=nginx
 kubectl exec -it john-pod -- bash
   ```
   #### Step 4 Verify API Access Action:
 ```sh
-kubectl auth can-i create deployments
-kubectl auth can-i create pods
+kubectl auth can-i create deployments #no
+kubectl auth can-i create pods #yes
 ```

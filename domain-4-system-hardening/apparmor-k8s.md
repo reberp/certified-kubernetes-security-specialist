@@ -5,9 +5,7 @@ apparmor_parser -q <<EOF
 
 profile k8s-apparmor-example-deny-write flags=(attach_disconnected) {
   #include <abstractions/base>
-
   file,
-
   # Deny all file writes.
   deny /** w,
 }
@@ -16,6 +14,7 @@ EOF
 #### Verify the status of the profile:
 ```sh
 aa-status
+#see k8s-apparmor-example-deny-write
 ```
 
 #### Sample YAML File based on Host PID:

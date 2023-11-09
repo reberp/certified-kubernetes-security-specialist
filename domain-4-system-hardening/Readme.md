@@ -6,23 +6,29 @@ The code mentioned in this document are used in the Certified Kubernetes Securit
 
 | Sr No | Document Link |
 | ------ | ------ |
-| 1 | [Overview of AppArmor][PlDa] |
-| 2 | [Integration of AppArmor with Kubernetes][PlDb] |
-| 3 | [Configuring containerd and runc][PlDc]
-| 4 | [Container Runtime Interface][PlDd]
-| 5 | [Implementing RunTimeClass - gVisor][PlDe] |
-| 6 | [Kubeadm and Calcio][PlDf] |
-| 7 | [Understanding Network Policies - Part 01][PlDg] |
-| 8 | [Understanding Network Policies - Part 02][PlDh] |
+| 1 | [Overview of AppArmor](apparmor.md) |
+| 2 | [Integration of AppArmor with Kubernetes](apparmor-k8s.md) |
+| 3 | [Configuring containerd and runc](oci.md)
+| 4 | [Container Runtime Interface](kubeadm-containerd.md)
+| 5 | [Implementing RunTimeClass - gVisor](gvisor.md) |
+| 6 | [Kubeadm and Calcio](kubeadm-calico.md) |
+| 7 | [Understanding Network Policies - Part 01](netpol.md) |
+| 8 | [Understanding Network Policies - Part 02](netpol-02.md) |
 
 
-   [PlDa]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/apparmor.md>
-   [PlDb]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/apparmor-k8s.md>
-   [PlDc]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/oci.md>
-   [PlDd]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/kubeadm-containerd.md>
+# AppArmor
+DAC shortcomings:
+* app of user has everything that user has 
 
-   [PlDe]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/gvisor.md>
+MAC: 
+* set by admin
+* confined and not confined processes 
+	* confined - not trusted, explicitly list things they can do
+	* not confined - more trusted
 
-   [PlDf]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/kubeadm-calico.md>
-   [PlDg]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/netpol.md>
-   [PlDh]: <https://github.com/zealvora/certified-kubernetes-security-specialist/blob/master/domain-4-system-hardening/netpol-02.md>
+Apparmor can enforce specific lists based on what it observes from a trial run. 
+aa-genprof
+* enforce - don't let bad things happen
+* complain - logged but allowed. 
+## AA in K8s
+profiles specified per container based on annotations

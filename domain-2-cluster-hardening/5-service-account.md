@@ -16,10 +16,10 @@ kubectl describe pod app-pod
 ```sh
 kubectl exec -it app-pod -- bash
 
-cd /var/run/secrets/kubernetes.io/serviceaccount/
-
+#where they store serviceaccountcredentials. Seen as mount in the pod spec 
+# has ca.crt and namespace
+cd /var/run/secrets/kubernetes.io/serviceaccount/ 
 ls
-
 cat token
 ```
 #### Connect to Kubernetes Cluster using Token
@@ -29,5 +29,5 @@ echo $token
 
 kubectl cluster-info (from outside of Pod)
 
-curl -k -H "Authorization: Bearer $token" https://control-plane-url-here/api/v1
+curl -k -H "Authorization: Bearer $token" https://control-plane-url-here:6443/api/v1
 ```

@@ -10,8 +10,9 @@ kubectl exec -it pod-1 -- bash
 ```sh
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 echo $TOKEN
-curl -k -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1"
-curl -k -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces"
+curl -k -H "Authorization: Bearer $TOKEN" "https://KUBERNETES_PORT_443_TCP_ADDR/api/v1" #works
+curl -k -H "Authorization: Bearer $TOKEN" "https://KUBERNETES_PORT_443_TCP_ADDR/api/v1/namespaces" #doesn't work
+#User \"system:serviceaccount:kplabs-test:default\" cannot list resource \"namespaces\"
 ```
 
 ### Approach 1 - Opt out AutoMounting at Service Account level (Reference):

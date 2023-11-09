@@ -26,7 +26,8 @@ kind: Ingress
 metadata:
   name: demo-ingress
   annotations:
-     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
 spec:
   tls:
   - hosts:
@@ -40,7 +41,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: example-service
+            name: example-svc
             port:
               number: 80
 ```
